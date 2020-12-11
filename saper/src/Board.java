@@ -25,7 +25,6 @@ public class Board {
                 board[i][j].minNumber = countMines(i, j);
             }
         }
-        display();
     }
 
     void randBombs() {
@@ -64,20 +63,6 @@ public class Board {
         return sum;
     }
 
-      void display () {
-
-            for (int i = 0; i < width; i++) {
-                for (int j = 0; j < height; j++) {
-                    if (board[i][j].isMine)
-                        System.out.printf("[x]");
-                    else {
-                        System.out.printf("[" + countMines(i, j) + "]");
-                    }
-                }
-                System.out.print("\n");
-            }
-        }
-
-    }
+}
 
 
