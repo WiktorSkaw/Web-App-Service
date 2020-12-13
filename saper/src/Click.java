@@ -14,13 +14,11 @@ public class Click implements MouseListener {
         int end;
         int win;
 
-
         if (e.getButton() == MouseEvent.BUTTON1) {
                 if (button.isMine) {
                     button.isDiscovered = true;
                     button.setText("M");
                     button.setBackground(Color.red);
-                    System.out.println("KONIEC GRY");
                     end = JOptionPane.showConfirmDialog(null, "Zakończ gre", "PRZEGRANA", JOptionPane.PLAIN_MESSAGE, JOptionPane.DEFAULT_OPTION);
                     if (end == JOptionPane.OK_OPTION || end == JOptionPane.CLOSED_OPTION)
                         System.exit(0);

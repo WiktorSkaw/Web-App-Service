@@ -27,7 +27,7 @@ public class Board {
         }
     }
 
-    void randBombs() {
+    void randBombs() { // losuje bomby
 
         Random r = new Random();
 
@@ -41,7 +41,7 @@ public class Board {
        }
     }
 
-    boolean hasMine(int x, int y) {
+    boolean hasMine(int x, int y) { // sprawdza czy bomba
 
         if (board[x][y].isMine)
             return true;
@@ -49,7 +49,7 @@ public class Board {
             return false;
     }
 
-    int countMines(int x, int y) {
+    int countMines(int x, int y) { // liczy bomby wokol pola
         int sum = 0;
         for (int i = x - 1; i <= x + 1; i++) {
             if(i>=0 && i<width)
