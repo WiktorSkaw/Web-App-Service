@@ -7,7 +7,6 @@ public class SaperJbutton extends JButton {
     boolean isFlag;
     int     minNumber;
 
-
     SaperJbutton() {
         isMine = false;
         isDiscovered = false;

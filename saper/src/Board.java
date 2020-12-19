@@ -41,12 +41,10 @@ public class Board {
        }
     }
 
-    boolean hasMine(int x, int y) { // sprawdza czy bomba
+    boolean hasMine(int x, int y) {
 
-        if (board[x][y].isMine)
-            return true;
-        else
-            return false;
+        return board[x][y].isMine;
+
     }
 
     int countMines(int x, int y) { // liczy bomby wokol pola
