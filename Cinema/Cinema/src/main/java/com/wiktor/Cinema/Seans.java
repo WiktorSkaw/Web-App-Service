@@ -9,7 +9,9 @@ public class Seans {
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Integer id;
     public Date time;
-    public Seats[][] seats;
+    public Integer[][] seats;
+    @ManyToOne
+    public Film film;
 
     public Integer getId() {
         return id;
@@ -19,7 +21,7 @@ public class Seans {
         return time;
     }
 
-    public Seats[][] getSeats() {
+    public Integer[][] getSeats() {
         return seats;
     }
 
@@ -35,7 +37,7 @@ public class Seans {
         this.time = time;
     }
 
-    public void setSeats(Seats[][] seats) {
+    public void setSeats(Integer[][] seats) {
         this.seats = seats;
     }
 
@@ -43,10 +45,14 @@ public class Seans {
         this.film = film;
     }
 
-    @ManyToOne
-    public Film film;
+
 
     Seans(){
-        seats = new Seats[7][7];
+        seats = new Integer[7][7];
+        for(int i=0; i<7; i++){
+            for(int j=0; j<7; j++){
+                seats[i][j] = 0;
+            }
+        }
     }
 }
