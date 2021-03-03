@@ -17,9 +17,6 @@ public class UserController {
         if (UserName != null) {
 
 
-            userRepository.;
-
-
         }
         return "mainpage";
     }
@@ -28,8 +25,10 @@ public class UserController {
     public String createClient(String UserPassword, String UserName, String UserMail, Model model) {
         if (UserName != null) {
             UserModel user = new UserModel();
-            user.setUserName(UserName);
 
+            user.setUserName(UserName);
+            user.setUserPassword(UserPassword);
+            user.setUserMail(UserMail);
             userRepository.save(user);
 
            // model.addAttribute("message", "User Created " + UserName);
