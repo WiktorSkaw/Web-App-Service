@@ -16,7 +16,27 @@ public class UserModel {
     String UserPassword;
     String UserMail;
 
+    public String getUserName() {
+        return UserName;
+    }
 
+    public void setUserName(String userName) {
+        UserName = userName;
+    }
 
+    public String getUserPassword() {
+        return UserPassword;
+    }
 
+    public void setUserPassword(String userPassword) {
+        UserPassword = userPassword;
+    }
+
+    public String getUserMail() {
+        return UserMail;
+    }
+
+    public void setUserMail(String userMail) {
+        UserMail = userMail;
+    }
 }

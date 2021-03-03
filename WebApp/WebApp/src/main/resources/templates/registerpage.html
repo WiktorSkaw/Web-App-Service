@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body {
+font-family: Arial, Helvetica, sans-serif;
+background-color: #339933;
+}
+
+.container {
+    margin: auto;
+    width: 60%;
+}
+input[type=text], input[type=password] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+button {
+  background-color: #a3c2c2;
+  font-size: 15px;
+  color: black;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+}
+
+    </style>
+</head>
+<body>
+<p th:text="${message}"></p>
+<form action="/Createuser">
+    <div class="container">
+        <label for="UserName">Name:</label><br>
+            <input type="text" id="UserName" name="name" placeholder="Enter Username">
+                <br><br>
+        <label for="UserMail">Name:</label><br>
+            <input type="text" id="UserMail" name="mail" placeholder="Enter Email">
+                <br><br>
+        <label for="UserPassword">Password:</label><br>
+            <input type="password" id="UserPassword" name="password" placeholder="Enter Password"><br>
+                <br><br>
+        <button type="submit">Register</button>
+    </div>
+</form>
+</body>
+</html>
