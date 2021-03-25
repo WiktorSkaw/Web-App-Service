@@ -6,37 +6,45 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class UserModel {
+public class User {
 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Integer id;
 
-    String UserName;
-    String UserPassword;
-    String UserMail;
+    String userName;
+    String userPassword;
+    String userMail;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public String getUserName() {
-        return UserName;
+        return userName;
     }
 
     public void setUserName(String userName) {
-        UserName = userName;
+        this.userName = userName;
     }
 
     public String getUserPassword() {
-        return UserPassword;
+        return userPassword;
     }
 
     public void setUserPassword(String userPassword) {
-        UserPassword = userPassword;
+        this.userPassword = userPassword;
     }
 
     public String getUserMail() {
-        return UserMail;
+        return userMail;
     }
 
     public void setUserMail(String userMail) {
-        UserMail = userMail;
+        this.userMail = userMail;
     }
 }
