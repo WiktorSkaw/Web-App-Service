@@ -37,16 +37,16 @@ button {
 </head>
 <body>
 <p th:text="${message}"></p>
-<form action="/Createuser" method="POST">
+<form action="/Createuser" method="POST" th:object="${registerform}" >
     <div class="container">
         <label for="UserName">Name:</label><br>
-            <input type="text" id="UserName" name="userName" placeholder="Enter Username">
+            <input type="text" id="UserName" th:field="*{userName}" placeholder="Enter Username">
                 <br><br>
         <label for="UserMail">Email:</label><br>
-            <input type="text" id="UserMail" name="userMail" placeholder="Enter Email">
+            <input type="text" id="UserMail"  th:field="*{userMail}" placeholder="Enter Email">
                 <br><br>
         <label for="UserPassword">Password:</label><br>
-            <input type="password" id="UserPassword" name="userPassword" placeholder="Enter Password"><br>
+            <input type="password" id="UserPassword" th:field="*{userPassword}" placeholder="Enter Password"><br>
                 <br><br>
         <button type="submit">Register</button>
     </div>

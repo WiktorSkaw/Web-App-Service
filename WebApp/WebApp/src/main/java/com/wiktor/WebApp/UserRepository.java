@@ -1,7 +1,12 @@
 package com.wiktor.WebApp;
 
-import org.springframework.data.repository.CrudRepository;
+import com.wiktor.WebApp.models.User;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.Repository;
 
-public interface UserRepository extends CrudRepository<User, Integer> {
+import java.util.Optional;
+
+public interface UserRepository extends JpaRepository<User, Integer> {
+    //Optional<>
     User findByUserName(String username);
 }

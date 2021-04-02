@@ -1,4 +1,4 @@
-package com.wiktor.WebApp;
+package com.wiktor.WebApp.models;
 
 import javax.persistence.Entity;
 
