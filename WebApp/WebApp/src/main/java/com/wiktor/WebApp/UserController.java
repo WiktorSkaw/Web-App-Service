@@ -15,25 +15,33 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class UserController {
 
-    MyUserDetailsService myUserDetailsService = new MyUserDetailsService();
+    @Autowired
+    MyUserDetailsService myUserDetailsService;
     @Autowired
     private UserRepository userRepository;
     //Login
     @RequestMapping(path="/Checkuser")
-    public String checkClient(String userName,String userPassword, Model model) {
-        if (userName != null) {
+    public String checkClient(@ModelAttribute("loginform") LoginForm loginForm, Model model) {
+        if (loginForm.getUserName() != null) {
 
 
-            String pass = myUserDetailsService.loadUserByUsername(userName).getPassword();
-            if(pass != userPassword){
+            String pass = myUserDetailsService.loadUserByUsername(loginForm.getUserName()).getPassword();
+            if(pass != loginForm.getUserPassword()){
                 System.out.println("Blad");
+                return "mainpage";
             }
 
             System.out.println("zalogowano");
-            model.addAttribute("message", "Zalogowano " + userName);
+            model.addAttribute("message", "Zalogowano " + loginForm.getUserName());
         }
+        return "homepage";
+    }
+
+    @RequestMapping(path="/LoginForm")
+    public String login(LoginForm loginForm) {
         return "mainpage";
     }
+
     //Registration
     @RequestMapping(path="/Createuser", method = RequestMethod.POST)
     public String createClient(@ModelAttribute("registerform") RegisterForm registerForm, Model model) {

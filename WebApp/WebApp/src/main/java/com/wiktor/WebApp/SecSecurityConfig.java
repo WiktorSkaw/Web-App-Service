@@ -17,7 +17,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class SecSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    UserDetailsService userDetailsService;
+    MyUserDetailsService userDetailsService;
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -27,16 +27,19 @@ public class SecSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                .csrf().ignoringAntMatchers("/Createuser").and()
+                .csrf().ignoringAntMatchers("/Createuser", "/perform_login").and()
                 .authorizeRequests()
-                .antMatchers("/", "/home").permitAll()
+                //.antMatchers("/", "/home").permitAll()
                 .antMatchers("/Createuser").anonymous()
                 .antMatchers("/RegisterForm").anonymous()
                 .antMatchers("/Checkuser").anonymous()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
-                .loginPage("/Checkuser")
+                .loginPage("/mainpage.html")
+                .loginProcessingUrl("/perform_login")
+                .defaultSuccessUrl("/")
+                .failureUrl("/mainpage.html")
                 .permitAll()
                 .and()
                 .logout()
@@ -44,8 +47,7 @@ public class SecSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    public BCryptPasswordEncoder getPasswordEncoder(){
+    public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-
 }
