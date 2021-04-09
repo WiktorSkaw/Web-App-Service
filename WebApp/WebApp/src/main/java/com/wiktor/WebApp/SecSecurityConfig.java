@@ -3,25 +3,45 @@ package com.wiktor.WebApp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.thymeleaf.extras.springsecurity5.dialect.SpringSecurityDialect;
 
 @Configuration
 @EnableWebSecurity
 public class SecSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Autowired
-    MyUserDetailsService userDetailsService;
-
+   // @Autowired
+    //MyUserDetailsService userDetailsService;
     @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService);
+     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+          auth.userDetailsService(userDetailsService());
+    }
+
+    @Bean
+    public UserDetailsService userDetailsService() {
+        return new MyUserDetailsService();
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return PasswordEncoderFactories.createDelegatingPasswordEncoder();
+    }
+
+    @Bean
+    public DaoAuthenticationProvider authenticationProvider() {
+        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
+        authProvider.setUserDetailsService(userDetailsService());
+        authProvider.setPasswordEncoder(passwordEncoder());
+        return authProvider;
     }
 
     @Override
@@ -33,21 +53,17 @@ public class SecSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/Createuser").anonymous()
                 .antMatchers("/RegisterForm").anonymous()
                 .antMatchers("/Checkuser").anonymous()
+                .antMatchers("/images/logo.jpg").anonymous()
                 .anyRequest().authenticated()
                 .and()
-                .formLogin()
-                .loginPage("/mainpage.html")
+                .formLogin().passwordParameter("password")
+                .loginPage("/LoginForm")
                 .loginProcessingUrl("/perform_login")
                 .defaultSuccessUrl("/")
-                .failureUrl("/mainpage.html")
+                .failureUrl("/LoginForm")
                 .permitAll()
                 .and()
                 .logout()
                 .permitAll();
-    }
-
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
     }
 }

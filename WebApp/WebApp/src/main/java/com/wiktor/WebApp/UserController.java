@@ -2,6 +2,8 @@ package com.wiktor.WebApp;
 
 import com.wiktor.WebApp.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -19,17 +21,18 @@ public class UserController {
     MyUserDetailsService myUserDetailsService;
     @Autowired
     private UserRepository userRepository;
+
     //Login
-    @RequestMapping(path="/Checkuser")
+    @RequestMapping(path = "/Checkuser")
     public String checkClient(@ModelAttribute("loginform") LoginForm loginForm, Model model) {
         if (loginForm.getUserName() != null) {
 
 
             String pass = myUserDetailsService.loadUserByUsername(loginForm.getUserName()).getPassword();
-            if(pass != loginForm.getUserPassword()){
-                System.out.println("Blad");
-                return "mainpage";
-            }
+            //if(pass != loginForm.getUserPassword()){
+            System.out.println("Blad");
+            //return "mainpage";
+            // }
 
             System.out.println("zalogowano");
             model.addAttribute("message", "Zalogowano " + loginForm.getUserName());
@@ -37,20 +40,20 @@ public class UserController {
         return "homepage";
     }
 
-    @RequestMapping(path="/LoginForm")
+    @RequestMapping(path = "/LoginForm")
     public String login(LoginForm loginForm) {
         return "mainpage";
     }
 
     //Registration
-    @RequestMapping(path="/Createuser", method = RequestMethod.POST)
+    @RequestMapping(path = "/Createuser", method = RequestMethod.POST)
     public String createClient(@ModelAttribute("registerform") RegisterForm registerForm, Model model) {
         if (registerForm.getUserName() != null) {
             User user = new User();
 
             PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
-            user.setUserName(registerForm.getUserName());
             user.setUserPassword(passwordEncoder.encode(registerForm.getUserPassword()));
+            user.setUserName(registerForm.getUserName());
             user.setUserMail(registerForm.getUserMail());
             userRepository.save(user);
             System.out.println("Dziala");
@@ -59,8 +62,14 @@ public class UserController {
         return "registerpage";
     }
 
-    @RequestMapping(path="/RegisterForm")
+    @RequestMapping(path = "/RegisterForm")
     public String register(@ModelAttribute("registerform") RegisterForm registerForm) {
         return "registerpage";
+    }
+
+    @RequestMapping(path = "/")
+    public String index() {
+        return "index";
+
     }
 }
