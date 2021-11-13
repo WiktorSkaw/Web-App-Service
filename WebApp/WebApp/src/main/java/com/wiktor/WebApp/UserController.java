@@ -23,6 +23,7 @@ public class UserController {
     private UserRepository userRepository;
 
     //Login
+    /*
     @RequestMapping(path = "/Checkuser")
     public String checkClient(@ModelAttribute("loginform") LoginForm loginForm, Model model) {
         if (loginForm.getUserName() != null) {
@@ -40,6 +41,8 @@ public class UserController {
         return "homepage";
     }
 
+
+     */
     @RequestMapping(path = "/LoginForm")
     public String login(LoginForm loginForm) {
         return "mainpage";
@@ -66,10 +69,14 @@ public class UserController {
     public String register(@ModelAttribute("registerform") RegisterForm registerForm) {
         return "registerpage";
     }
-
-    @RequestMapping(path = "/")
-    public String index() {
-        return "index";
+    @RequestMapping(path = "/perform_login")
+    public String processing() {
+        return "homepage";
 
     }
+//    @RequestMapping(path = "/LoginSuccess")
+//    public String index() {
+//        return "index";
+//
+//    }
 }

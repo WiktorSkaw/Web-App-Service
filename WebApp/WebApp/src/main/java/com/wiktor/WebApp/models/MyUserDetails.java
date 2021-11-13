@@ -18,6 +18,10 @@ public class MyUserDetails implements UserDetails {
         this.userPassword = user.getUserPassword();
     }
 
+    public String getUserName() {
+        return userName;
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return null;
@@ -52,4 +56,5 @@ public class MyUserDetails implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
 }

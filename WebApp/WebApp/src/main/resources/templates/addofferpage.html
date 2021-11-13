@@ -37,18 +37,18 @@ button {
 </head>
 <body>
 <p th:text="${message}"></p>
-<form action="/Createuser" method="POST" th:object="${registerform}" >
+<form action="/saveOfferDetails" method="POST" th:object="${addofferform}"  enctype="multipart/form-data">
     <div class="container">
-        <label for="UserName">Name:</label><br>
-            <input type="text" id="UserName" th:field="*{userName}" placeholder="Enter Username">
-                <br><br>
-        <label for="UserMail">Email:</label><br>
-            <input type="text" id="UserMail"  th:field="*{userMail}" placeholder="Enter Email">
-                <br><br>
-        <label for="UserPassword">Password:</label><br>
-            <input type="password" id="UserPassword" th:field="*{userPassword}" placeholder="Enter Password"><br>
-                <br><br>
-        <button type="submit">Register</button>
+        <label for="Name">Name:</label><br>
+        <input type="text" id="Name" th:field="*{name}" placeholder="Enter name">
+        <br><br>
+        <label for="Description">Description:</label><br>
+        <input type="text" id="Description"  th:field="*{description}" placeholder="Enter description">
+        <br><br>
+        <label for="image">Image:</label><br>
+        <input type="file" name="image" id="image" th:field="*{image}" placeholder=""  accept="image/png, image/jpeg"  multiple="multiple"><br>
+        <br><br>
+        <button type="submit">Save offer</button>
     </div>
 </form>
 </body>

@@ -22,8 +22,7 @@ public class MyUserDetailsService implements UserDetailsService {
         if (user == null) {
             throw new UsernameNotFoundException(userName);
         }
-        //user.orElseThrow(() -> new UsernameNotFoundException("Not found: " + userName));
 
-        return new MyUserDetails(user);//user.map(MyUserDetails::new).get();
+        return new MyUserDetails(user);
     }
 }

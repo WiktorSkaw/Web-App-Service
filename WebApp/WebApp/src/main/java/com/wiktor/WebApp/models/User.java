@@ -1,9 +1,7 @@
 package com.wiktor.WebApp.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class User {
@@ -15,6 +13,17 @@ public class User {
     String userName;
     String userPassword;
     String userMail;
+
+    @OneToMany
+    List<OfferModel> offerModel;
+
+  //  public List<OfferModel> getOfferModel() {
+   //     return offerModel;
+  //  }
+
+  //  public void setOfferModel(List<OfferModel> offerModel) {
+  //      this.offerModel = offerModel;
+  //  }
 
     public Integer getId() {
         return id;

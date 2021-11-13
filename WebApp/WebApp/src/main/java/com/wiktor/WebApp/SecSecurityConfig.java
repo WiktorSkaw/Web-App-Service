@@ -47,23 +47,27 @@ public class SecSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                .csrf().ignoringAntMatchers("/Createuser", "/perform_login").and()
+                //.csrf().ignoringAntMatchers("/Createuser", "/perform_login").and()
+                .cors().and().csrf().disable()
                 .authorizeRequests()
                 //.antMatchers("/", "/home").permitAll()
                 .antMatchers("/Createuser").anonymous()
                 .antMatchers("/RegisterForm").anonymous()
                 .antMatchers("/Checkuser").anonymous()
                 .antMatchers("/images/logo.jpg").anonymous()
+                .antMatchers("/AddOfferForm").authenticated()
+                .antMatchers("/saveOfferDetails").authenticated()
+                //.antMatchers("/LoginSuccess").authenticated()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin().passwordParameter("password")
                 .loginPage("/LoginForm")
                 .loginProcessingUrl("/perform_login")
-                .defaultSuccessUrl("/")
+                .defaultSuccessUrl("/LoginSuccess")
                 .failureUrl("/LoginForm")
                 .permitAll()
                 .and()
-                .logout()
+                .logout().logoutSuccessUrl("/LoginForm").permitAll()
                 .permitAll();
     }
 }

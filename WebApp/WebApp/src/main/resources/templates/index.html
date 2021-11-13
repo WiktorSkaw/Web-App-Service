@@ -1,12 +1,75 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <style>
+    body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #339933;
+    }
+
+    .container{
+    height:100vh;
+    background-color: #339933;
+    display:flex;
+    }
+
+    .right {
+    margin: auto;
+    display: inline-block;
+    background-color: #3cf2c2;
+    height: 100%;
+    text-align:center;
+    }
+
+    img.logo {
+      border-radius: 50%;
+      width: 15%;
+      height: auto;
+      display:block;
+    }
+
+    .username{
+    display:block;
+    }
+
+    button {
+      background-color: #a3c2c2;
+      font-size: 15px;
+      color: black;
+      padding: 14px 20px;
+      margin: 8px 0;
+      border: none;
+      cursor: pointer;
+      display:inline-block;
+    }
+    </style>
 </head>
 <body>
-<!--<div th:replace="fragments/header :: header"></div>
--->
-
+<div class="container">
+<div class="right">
+    <form th:action="@{/logout}" method="post">
+        <p>
+            Welcome <b>[[${#request.userPrincipal.principal.UserName}]]</b>
+        </p>
+        <input type="submit" value="Sign Out">
+    </form>
+    <form action="/AddOfferForm" method="POST">
+        <button type="submit">Add an offer</button>
+    </form>
+    <form action="/BrowseOffers" method="POST">
+        <button type="submit">Browse your liked offers</button>
+    </form>
+</div>
+<div class="right">
+    <div>
+        <img th:src="*{'data:image/png;base64,'+img}" alt="" />
+        <p th:text="${description}"></p>
+        <button type="submit">X</button>
+        <button type="submit">Y</button>
+    </div>
+</div>
+</div>
 </body>
 </html>
